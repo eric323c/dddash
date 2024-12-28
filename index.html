@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard with Popup Taskbar</title>
+  <title>Main Dashboard</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -21,24 +21,37 @@
     .open-toolbar-btn:hover {
       background-color: #45a049;
     }
+    #message-area {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      display: inline-block;
+      background-color: #f9f9f9;
+      min-width: 200px;
+      text-align: left;
+    }
   </style>
 </head>
 <body>
   <h1>Main Dashboard</h1>
   <p>Click the button below to open the toolbar as a popup.</p>
   <button class="open-toolbar-btn" onclick="openToolbar()">Open Toolbar</button>
+  
+  <div id="message-area">No actions yet...</div>
 
   <script>
+    let toolbar;
+
     function openToolbar() {
-      // Open a popup window with specified dimensions
-      const popup = window.open(
+      toolbar = window.open(
         "",
         "Toolbar",
         "width=60,height=300,top=100,left=10,resizable=no"
       );
 
       // Add content to the popup window
-      popup.document.write(`
+      toolbar.document.write(`
         <!DOCTYPE html>
         <html lang="en">
         <head>
@@ -69,14 +82,26 @@
           </style>
         </head>
         <body>
-          <button onclick="parent.alert('Feature: Files opened in main page!')">📂</button>
-          <button onclick="parent.alert('Settings opened in main page!')">⚙️</button>
-          <button onclick="parent.alert('Locked!')">🔒</button>
+          <button onclick="sendMessage('Files opened')">📂</button>
+          <button onclick="sendMessage('Settings updated')">⚙️</button>
+          <button onclick="sendMessage('Locked system')">🔒</button>
           <button onclick="window.close()">❌</button>
+
+          <script>
+            function sendMessage(message) {
+              window.opener.postMessage(message, "*");
+            }
+          </script>
         </body>
         </html>
       `);
     }
+
+    // Listen for messages from the popup
+    window.addEventListener("message", (event) => {
+      const messageArea = document.getElementById("message-area");
+      messageArea.innerText = `Action: ${event.data}`;
+    });
   </script>
 </body>
 </html>
