@@ -9,9 +9,17 @@ function uploadAsset() {
             const gallery = document.getElementById("assetGallery");
             const img = document.createElement("img");
             img.src = e.target.result;
+            img.alt = file.name;
             gallery.appendChild(img);
         };
         reader.readAsDataURL(file);
     }
 }
 
+// Add a new folder
+function addFolder(folderName) {
+    const folder = document.createElement("div");
+    folder.className = "asset-folder";
+    folder.innerHTML = `<h3>${folderName}</h3><div class="folder-content"></div>`;
+    document.getElementById("assetGallery").appendChild(folder);
+}
