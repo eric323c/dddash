@@ -1,1 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasks</title>
+    <link rel="stylesheet" href="../css/tasks.css">
+    <script src="../js/tasks.js" defer></script>
+</head>
+<body>
+    <div id="workspace">
+        <header>
+            <h1>Tasks</h1>
+        </header>
+        <main>
+            <ul id="taskList"></ul>
+            <button onclick="showModal('addTaskModal')">Add Task</button>
+        </main>
+        <!-- Modals -->
+        <div id="addTaskModal" class="modal hidden">
+            <h3>Add Task</h3>
+            <label for="taskName">Task Name:</label>
+            <input type="text" id="taskName">
+            <label for="taskPriority">Priority:</label>
+            <select id="taskPriority">
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+            </select>
+            <button onclick="addTask()">Add</button>
+            <button onclick="closeModal('addTaskModal')">Cancel</button>
+        </div>
+    </div>
+</body>
+</html>
 
