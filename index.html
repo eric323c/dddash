@@ -31,77 +31,78 @@
       min-width: 200px;
       text-align: left;
     }
+    #toolbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 60px;
+      height: 100%;
+      background-color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      color: white;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s ease;
+      transform: translateX(-100%);
+    }
+    #toolbar.open {
+      transform: translateX(0);
+    }
+    #toolbar button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    #toolbar button:hover {
+      color: #4CAF50;
+    }
+    #toolbar-toggle {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
   <h1>Main Dashboard</h1>
-  <p>Click the button below to open the toolbar as a popup.</p>
-  <button class="open-toolbar-btn" onclick="openToolbar()">Open Toolbar</button>
-  
+  <p>Interact with the taskbar for actions.</p>
   <div id="message-area">No actions yet...</div>
 
+  <button id="toolbar-toggle">Open Toolbar</button>
+
+  <div id="toolbar">
+    <button onclick="updateMessage('Files opened')">📂</button>
+    <button onclick="updateMessage('Settings updated')">⚙️</button>
+    <button onclick="updateMessage('Locked system')">🔒</button>
+    <button onclick="hideToolbar()">❌</button>
+  </div>
+
   <script>
-    let toolbar;
+    const toolbar = document.getElementById('toolbar');
+    const toolbarToggle = document.getElementById('toolbar-toggle');
+    const messageArea = document.getElementById('message-area');
 
-    function openToolbar() {
-      toolbar = window.open(
-        "",
-        "Toolbar",
-        "width=60,height=300,top=100,left=10,resizable=no"
-      );
+    toolbarToggle.addEventListener('click', () => {
+      toolbar.classList.add('open');
+    });
 
-      // Add content to the popup window
-      toolbar.document.write(`
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-          <meta charset="UTF-8">
-          <title>Toolbar</title>
-          <style>
-            body {
-              margin: 0;
-              font-family: Arial, sans-serif;
-              background-color: #333;
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              justify-content: space-around;
-              height: 100%;
-              color: white;
-            }
-            button {
-              background: none;
-              border: none;
-              color: white;
-              font-size: 24px; /* Icon size */
-              cursor: pointer;
-            }
-            button:hover {
-              color: #4CAF50;
-            }
-          </style>
-        </head>
-        <body>
-          <button onclick="sendMessage('Files opened')">📂</button>
-          <button onclick="sendMessage('Settings updated')">⚙️</button>
-          <button onclick="sendMessage('Locked system')">🔒</button>
-          <button onclick="window.close()">❌</button>
-
-          <script>
-            function sendMessage(message) {
-              window.opener.postMessage(message, "*");
-            }
-          </script>
-        </body>
-        </html>
-      `);
+    function hideToolbar() {
+      toolbar.classList.remove('open');
     }
 
-    // Listen for messages from the popup
-    window.addEventListener("message", (event) => {
-      const messageArea = document.getElementById("message-area");
-      messageArea.innerText = `Action: ${event.data}`;
-    });
+    function updateMessage(message) {
+      messageArea.innerText = `Action: ${message}`;
+    }
   </script>
 </body>
 </html>
