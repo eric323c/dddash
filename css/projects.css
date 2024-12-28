@@ -53,3 +53,15 @@
     background-color: #eee;
 }
 
+.progress-bar {
+    height: 5px;
+    background-color: #ddd;
+    border-radius: 2px;
+    margin-top: 0.5em;
+}
+
+.progress-bar div {
+    height: 100%;
+    background-color: #5e5ecf;
+    border-radius: 2px;
+}
