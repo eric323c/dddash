@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard Toolbar</title>
+  <title>Compact Toolbar Dashboard</title>
   <style>
     body {
       margin: 0;
@@ -14,25 +14,26 @@
       flex-direction: column;
       height: 100vh;
       width: 100%;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, width 0.3s ease;
     }
     #toolbar {
       position: fixed;
       top: 0;
       left: 0;
-      width: 60px;
+      width: 60px; /* Adjusted to resemble a thin taskbar */
       height: 100%;
       background-color: #333;
-      display: none;
+      display: none; /* Hidden by default */
       flex-direction: column;
       align-items: center;
       justify-content: space-around;
+      transition: width 0.3s ease;
     }
     #toolbar button {
       background: none;
       border: none;
       color: white;
-      font-size: 16px;
+      font-size: 20px; /* Adjusted size for icons */
       cursor: pointer;
     }
     #toolbar button:hover {
@@ -49,6 +50,9 @@
       cursor: pointer;
       border-radius: 4px;
     }
+    #toolbar.small {
+      width: 40px; /* Smaller width for a compact taskbar style */
+    }
   </style>
 </head>
 <body>
@@ -57,7 +61,7 @@
     <h1>Welcome to the Employee Dashboard</h1>
     <p>This is where your dashboard content will appear.</p>
   </div>
-  <div id="toolbar">
+  <div id="toolbar" class="small">
     <button onclick="restoreDashboard()">☰</button>
     <button>📂</button>
     <button>⚙️</button>
@@ -69,11 +73,13 @@
 
     function toggleToolbar() {
       dashboard.style.transform = "translateX(-100%)";
+      dashboard.style.width = "0"; /* Collapse the main content completely */
       toolbar.style.display = "flex";
     }
 
     function restoreDashboard() {
       dashboard.style.transform = "translateX(0)";
+      dashboard.style.width = "100%"; /* Restore the full width */
       toolbar.style.display = "none";
     }
   </script>
