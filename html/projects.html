@@ -1,1 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects</title>
+    <link rel="stylesheet" href="../css/projects.css">
+    <script src="../js/projects.js" defer></script>
+</head>
+<body>
+    <div id="workspace">
+        <header>
+            <h1>Projects</h1>
+        </header>
+        <main>
+            <div class="filter-sort">
+                <label for="filterProjects">Filter:</label>
+                <select id="filterProjects" onchange="filterProjects()">
+                    <option value="all">All</option>
+                    <option value="in-progress">In Progress</option>
+                    <option value="completed">Completed</option>
+                </select>
+                <button onclick="sortProjects()">Sort by Deadline</button>
+            </div>
+            <div id="projectKanban" class="kanban-board"></div>
+            <button onclick="showModal('addProjectModal')">Add Project</button>
+        </main>
+        <!-- Modals -->
+        <div id="addProjectModal" class="modal hidden">
+            <h3>Add Project</h3>
+            <label for="projectTitle">Title:</label>
+            <input type="text" id="projectTitle">
+            <label for="projectDesc">Description:</label>
+            <textarea id="projectDesc"></textarea>
+            <button onclick="addProject()">Add</button>
+            <button onclick="closeModal('addProjectModal')">Cancel</button>
+        </div>
+    </div>
+</body>
+</html>
 
