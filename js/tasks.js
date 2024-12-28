@@ -4,9 +4,10 @@ let tasks = [];
 function addTask() {
     const taskName = document.getElementById("taskName").value;
     const taskPriority = document.getElementById("taskPriority").value;
+    const recurrence = document.getElementById("taskRecurrence").value;
 
     if (taskName && taskPriority) {
-        tasks.push({ name: taskName, priority: taskPriority, completed: false });
+        tasks.push({ name: taskName, priority: taskPriority, completed: false, recurrence });
         renderTasks();
         closeModal("addTaskModal");
     }
@@ -20,6 +21,7 @@ function renderTasks() {
             (task, index) => `
         <li class="${task.completed ? "completed" : ""}">
             ${task.name} - <strong>${task.priority}</strong>
+            ${task.recurrence ? `<small>(Recurring: ${task.recurrence})</small>` : ""}
             <button onclick="toggleTask(${index})">Toggle</button>
         </li>
     `
@@ -32,9 +34,3 @@ function toggleTask(index) {
     tasks[index].completed = !tasks[index].completed;
     renderTasks();
 }
-
-// Initialize task list
-window.onload = function () {
-    renderTasks();
-};
-
