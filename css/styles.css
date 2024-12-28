@@ -71,7 +71,10 @@ body {
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
-    background: none;
+}
+
+.taskbar nav a.active {
+    background-color: #5e5ecf;
 }
 
 .taskbar nav a:hover {
