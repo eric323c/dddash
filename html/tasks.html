@@ -4,33 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tasks</title>
-    <link rel="stylesheet" href="../css/tasks.css">
-    <script src="../js/tasks.js" defer></script>
+    <link rel="stylesheet" href="css/tasks.css">
+    <script src="js/tasks.js" defer></script>
 </head>
 <body>
     <div id="workspace">
-        <header>
-            <h1>Tasks</h1>
-        </header>
-        <main>
+        <!-- Sidebar (Taskbar) -->
+        <aside id="taskbarDocked" class="taskbar">
+            <button id="collapseToggle" onclick="toggleSidebar()">☰</button>
+            <div class="profile">
+                <img src="https://via.placeholder.com/50" alt="Profile Picture" class="avatar">
+                <div class="info">
+                    <p id="username">John Doe</p>
+                    <p id="role">Designer</p>
+                </div>
+            </div>
+            <nav>
+                <a href="index.html" class="nav-item">🏠 Dashboard</a>
+                <a href="projects.html" class="nav-item">📁 Projects</a>
+                <a href="tasks.html" class="nav-item">✔️ Tasks</a>
+                <a href="assets.html" class="nav-item">📂 Assets</a>
+                <a href="collaboration.html" class="nav-item">💬 Collaboration</a>
+                <a href="tools.html" class="nav-item">🛠️ Tools</a>
+            </nav>
+            <button id="dockToggle" onclick="toggleTaskbar()">Undock Taskbar</button>
+        </aside>
+
+        <!-- Main Content -->
+        <main id="workspaceContent">
+            <header class="sticky-header">
+                <h1>Tasks</h1>
+            </header>
             <ul id="taskList"></ul>
             <button onclick="showModal('addTaskModal')">Add Task</button>
+
+            <!-- Add Task Modal -->
+            <div id="addTaskModal" class="modal hidden">
+                <h3>Add Task</h3>
+                <label for="taskName">Task Name:</label>
+                <input type="text" id="taskName">
+                <label for="taskPriority">Priority:</label>
+                <select id="taskPriority">
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+                <label for="taskRecurrence">Recurrence:</label>
+                <select id="taskRecurrence">
+                    <option value="none">None</option>
+                    <option value="daily">Daily</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                </select>
+                <button onclick="addTask()">Add</button>
+                <button onclick="closeModal('addTaskModal')">Cancel</button>
+            </div>
         </main>
-        <!-- Modals -->
-        <div id="addTaskModal" class="modal hidden">
-            <h3>Add Task</h3>
-            <label for="taskName">Task Name:</label>
-            <input type="text" id="taskName">
-            <label for="taskPriority">Priority:</label>
-            <select id="taskPriority">
-                <option value="high">High</option>
-                <option value="medium">Medium</option>
-                <option value="low">Low</option>
-            </select>
-            <button onclick="addTask()">Add</button>
-            <button onclick="closeModal('addTaskModal')">Cancel</button>
-        </div>
     </div>
 </body>
 </html>
-
