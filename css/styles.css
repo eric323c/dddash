@@ -1,87 +1,172 @@
-/* Taskbar Styling */
+/* General Styling */
 body {
     margin: 0;
-    padding: 0;
-    background-color: #2e2e3e;
     font-family: Arial, sans-serif;
-    color: white;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    height: 100vh;
 }
 
+#workspace {
+    display: flex;
+    flex-grow: 1;
+}
+
+/* Sidebar (Taskbar) */
 .taskbar {
     background-color: #1e1e2f;
-    width: 90px;
-    height: 100vh;
+    color: white;
+    width: 250px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1em 0;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    padding: 1em;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+    transition: width 0.3s ease;
+}
+
+.taskbar.collapsed {
+    width: 60px;
+}
+
+#collapseToggle {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    margin-bottom: 1em;
 }
 
 .profile {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 1em;
+    margin-bottom: 2em;
 }
 
 .avatar {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: #3e3e4f;
     margin-bottom: 0.5em;
+    background-color: #ccc;
+}
+
+.info {
+    text-align: center;
 }
 
 .info p {
     margin: 0;
-    text-align: center;
-    font-size: 12px;
-    color: #fff;
+    font-size: 14px;
 }
 
-.icons {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-}
-
-.icon-button {
-    background: none;
-    border: none;
+.taskbar nav a {
+    text-decoration: none;
+    color: white;
+    display: block;
+    padding: 0.5em 1em;
+    margin: 0.2em 0;
+    border-radius: 4px;
     cursor: pointer;
-    font-size: 24px;
-    transition: transform 0.2s ease, color 0.2s ease;
-}
-
-.icon-button:hover {
-    transform: scale(1.2);
-}
-
-.logout-button {
+    font-size: 16px;
     background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 24px;
 }
 
-/* Popups */
-.popup {
+.taskbar nav a:hover {
+    background-color: #3c3c5e;
+}
+
+#dockToggle {
+    margin-top: auto;
+    background-color: #5e5ecf;
+    padding: 0.5em;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#dockToggle:hover {
+    background-color: #7e7eff;
+}
+
+/* Sticky Header */
+.sticky-header {
+    position: sticky;
+    top: 0;
+    background: white;
+    padding: 1em;
+    border-bottom: 1px solid #ddd;
+    z-index: 10;
+}
+
+.sticky-header h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #1e1e2f;
+}
+
+.sticky-header p {
+    margin: 0.5em 0 0;
+    font-size: 14px;
+    color: #666;
+}
+
+/* Modals */
+.modal {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #1e1e2f;
-    color: white;
-    padding: 1em;
+    background: white;
+    padding: 2em;
     border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    z-index: 100;
 }
 
+.modal h3 {
+    margin-top: 0;
+    font-size: 20px;
+}
+
+.modal input,
+.modal textarea,
+.modal select {
+    width: 100%;
+    margin-bottom: 1em;
+    padding: 0.5em;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.modal button {
+    padding: 0.5em 1em;
+    background-color: #5e5ecf;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.modal button:hover {
+    background-color: #7e7eff;
+}
+
+/* Hidden Utility Class */
 .hidden {
     display: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .taskbar {
+        width: 200px;
+    }
+
+    #workspaceContent {
+        padding: 1em;
+    }
 }
