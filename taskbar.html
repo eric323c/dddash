@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taskbar</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1e1e2f;
+            color: white;
+            font-family: Arial, sans-serif;
+            width: 200px;
+            height: 100%;
+        }
+        .taskbar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1em;
+        }
+        button {
+            margin: 0.5em;
+            padding: 0.5em 1em;
+            background-color: #5e5ecf;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="taskbar">
+        <h2>Taskbar</h2>
+        <button onclick="alert('Opening Palette Manager...')">Palette Manager</button>
+        <button onclick="alert('Launching Shortcuts...')">Shortcut Manager</button>
+        <button onclick="alert('Uploading Files...')">File Upload</button>
+        <button onclick="alert('Signing Out...')">Sign Out</button>
+    </div>
+</body>
+</html>
