@@ -4,15 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects</title>
-    <link rel="stylesheet" href="../css/projects.css">
-    <script src="../js/projects.js" defer></script>
+    <link rel="stylesheet" href="css/projects.css">
+    <script src="js/projects.js" defer></script>
 </head>
 <body>
     <div id="workspace">
-        <header>
-            <h1>Projects</h1>
-        </header>
-        <main>
+        <!-- Sidebar (Taskbar) -->
+        <aside id="taskbarDocked" class="taskbar">
+            <button id="collapseToggle" onclick="toggleSidebar()">☰</button>
+            <div class="profile">
+                <img src="https://via.placeholder.com/50" alt="Profile Picture" class="avatar">
+                <div class="info">
+                    <p id="username">John Doe</p>
+                    <p id="role">Designer</p>
+                </div>
+            </div>
+            <nav>
+                <a href="index.html" class="nav-item">🏠 Dashboard</a>
+                <a href="projects.html" class="nav-item">📁 Projects</a>
+                <a href="tasks.html" class="nav-item">✔️ Tasks</a>
+                <a href="assets.html" class="nav-item">📂 Assets</a>
+                <a href="collaboration.html" class="nav-item">💬 Collaboration</a>
+                <a href="tools.html" class="nav-item">🛠️ Tools</a>
+            </nav>
+            <button id="dockToggle" onclick="toggleTaskbar()">Undock Taskbar</button>
+        </aside>
+
+        <!-- Main Content -->
+        <main id="workspaceContent">
+            <header class="sticky-header">
+                <h1>Projects</h1>
+            </header>
             <div class="filter-sort">
                 <label for="filterProjects">Filter:</label>
                 <select id="filterProjects" onchange="filterProjects()">
@@ -25,17 +47,19 @@
             <div id="projectKanban" class="kanban-board"></div>
             <button onclick="showModal('addProjectModal')">Add Project</button>
         </main>
-        <!-- Modals -->
+
+        <!-- Add Project Modal -->
         <div id="addProjectModal" class="modal hidden">
             <h3>Add Project</h3>
             <label for="projectTitle">Title:</label>
             <input type="text" id="projectTitle">
             <label for="projectDesc">Description:</label>
             <textarea id="projectDesc"></textarea>
+            <label for="projectDueDate">Due Date:</label>
+            <input type="date" id="projectDueDate">
             <button onclick="addProject()">Add</button>
             <button onclick="closeModal('addProjectModal')">Cancel</button>
         </div>
     </div>
 </body>
 </html>
-
