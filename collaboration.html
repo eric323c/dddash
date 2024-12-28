@@ -4,18 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Collaboration</title>
-    <link rel="stylesheet" href="../css/collaboration.css">
-    <script src="../js/collaboration.js" defer></script>
+    <link rel="stylesheet" href="css/collaboration.css">
+    <script src="js/collaboration.js" defer></script>
 </head>
 <body>
     <div id="workspace">
-        <header>
-            <h1>Collaboration</h1>
-        </header>
-        <main>
-            <textarea id="collabNotes" placeholder="Write your notes here..."></textarea>
+        <!-- Sidebar (Taskbar) -->
+        <aside id="taskbarDocked" class="taskbar">
+            <button id="collapseToggle" onclick="toggleSidebar()">☰</button>
+            <div class="profile">
+                <img src="https://via.placeholder.com/50" alt="Profile Picture" class="avatar">
+                <div class="info">
+                    <p id="username">John Doe</p>
+                    <p id="role">Designer</p>
+                </div>
+            </div>
+            <nav>
+                <a href="index.html" class="nav-item">🏠 Dashboard</a>
+                <a href="projects.html" class="nav-item">📁 Projects</a>
+                <a href="tasks.html" class="nav-item">✔️ Tasks</a>
+                <a href="assets.html" class="nav-item">📂 Assets</a>
+                <a href="collaboration.html" class="nav-item active">💬 Collaboration</a>
+                <a href="tools.html" class="nav-item">🛠️ Tools</a>
+            </nav>
+            <button id="dockToggle" onclick="toggleTaskbar()">Undock Taskbar</button>
+        </aside>
+
+        <!-- Main Content -->
+        <main id="workspaceContent">
+            <header class="sticky-header">
+                <h1>Collaboration</h1>
+            </header>
+            <textarea id="collabNotes" placeholder="Write your notes here..." oninput="saveCollabNotes()"></textarea>
+            <p>Changes are saved automatically.</p>
         </main>
     </div>
 </body>
 </html>
-
