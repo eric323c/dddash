@@ -4,20 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quick Tools</title>
-    <link rel="stylesheet" href="../css/tools.css">
-    <script src="../js/tools.js" defer></script>
+    <link rel="stylesheet" href="css/tools.css">
+    <script src="js/tools.js" defer></script>
 </head>
 <body>
     <div id="workspace">
-        <header>
-            <h1>Quick Tools</h1>
-        </header>
-        <main>
-            <button onclick="openColorPalette()">🎨 Color Palette</button>
-            <button onclick="openTypographyGuide()">🅰️ Typography Guide</button>
-            <button onclick="openShortcutManager()">⚡ Shortcut Manager</button>
+        <!-- Sidebar (Taskbar) -->
+        <aside id="taskbarDocked" class="taskbar">
+            <button id="collapseToggle" onclick="toggleSidebar()">☰</button>
+            <div class="profile">
+                <img src="https://via.placeholder.com/50" alt="Profile Picture" class="avatar">
+                <div class="info">
+                    <p id="username">John Doe</p>
+                    <p id="role">Designer</p>
+                </div>
+            </div>
+            <nav>
+                <a href="index.html" class="nav-item">🏠 Dashboard</a>
+                <a href="projects.html" class="nav-item">📁 Projects</a>
+                <a href="tasks.html" class="nav-item">✔️ Tasks</a>
+                <a href="assets.html" class="nav-item">📂 Assets</a>
+                <a href="collaboration.html" class="nav-item">💬 Collaboration</a>
+                <a href="tools.html" class="nav-item active">🛠️ Tools</a>
+            </nav>
+            <button id="dockToggle" onclick="toggleTaskbar()">Undock Taskbar</button>
+        </aside>
+
+        <!-- Main Content -->
+        <main id="workspaceContent">
+            <header class="sticky-header">
+                <h1>Quick Tools</h1>
+            </header>
+            <div>
+                <button onclick="openColorPalette()">🎨 Color Palette</button>
+                <button onclick="openTypographyGuide()">🅰️ Typography Guide</button>
+                <button onclick="openShortcutManager()">⚡ Shortcut Manager</button>
+            </div>
         </main>
     </div>
 </body>
 </html>
-
