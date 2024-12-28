@@ -1,108 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Main Dashboard</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin: 20px;
-    }
-    .open-toolbar-btn {
-      padding: 10px 20px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .open-toolbar-btn:hover {
-      background-color: #45a049;
-    }
-    #message-area {
-      margin-top: 20px;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      display: inline-block;
-      background-color: #f9f9f9;
-      min-width: 200px;
-      text-align: left;
-    }
-    #toolbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 60px;
-      height: 100%;
-      background-color: #333;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-around;
-      color: white;
-      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
-      transition: transform 0.3s ease;
-      transform: translateX(-100%);
-    }
-    #toolbar.open {
-      transform: translateX(0);
-    }
-    #toolbar button {
-      background: none;
-      border: none;
-      color: white;
-      font-size: 24px;
-      cursor: pointer;
-    }
-    #toolbar button:hover {
-      color: #4CAF50;
-    }
-    #toolbar-toggle {
-      position: fixed;
-      top: 10px;
-      left: 10px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workspace</title>
+    <script src="script.js" defer></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .workspace {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-  <h1>Main Dashboard</h1>
-  <p>Interact with the taskbar for actions.</p>
-  <div id="message-area">No actions yet...</div>
-
-  <button id="toolbar-toggle">Open Toolbar</button>
-
-  <div id="toolbar">
-    <button onclick="updateMessage('Files opened')">📂</button>
-    <button onclick="updateMessage('Settings updated')">⚙️</button>
-    <button onclick="updateMessage('Locked system')">🔒</button>
-    <button onclick="hideToolbar()">❌</button>
-  </div>
-
-  <script>
-    const toolbar = document.getElementById('toolbar');
-    const toolbarToggle = document.getElementById('toolbar-toggle');
-    const messageArea = document.getElementById('message-area');
-
-    toolbarToggle.addEventListener('click', () => {
-      toolbar.classList.add('open');
-    });
-
-    function hideToolbar() {
-      toolbar.classList.remove('open');
-    }
-
-    function updateMessage(message) {
-      messageArea.innerText = `Action: ${message}`;
-    }
-  </script>
+    <div class="workspace">
+        <h1>Main Workspace</h1>
+        <p>This is your main workspace. Minimize to see the taskbar pop-up.</p>
+    </div>
 </body>
 </html>
