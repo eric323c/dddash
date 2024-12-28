@@ -19,3 +19,10 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
+.asset-folder {
+    margin-top: 1em;
+    padding: 1em;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
