@@ -4,27 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Workspace</title>
-    <script src="script.js" defer></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        .workspace {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/script.js" defer></script>
 </head>
 <body>
-    <div class="workspace">
-        <h1>Main Workspace</h1>
-        <p>This is your main workspace. Minimize to see the taskbar pop-up.</p>
+    <div id="workspace">
+        <!-- Sidebar -->
+        <aside id="taskbarDocked" class="taskbar">
+            <button id="collapseToggle" onclick="toggleSidebar()">☰</button>
+            <div class="profile">
+                <img src="https://via.placeholder.com/50" alt="Profile Picture" class="avatar">
+                <div class="info">
+                    <p id="username">John Doe</p>
+                    <p id="role">Designer</p>
+                </div>
+            </div>
+            <nav>
+                <a href="html/projects.html">📁 Projects</a>
+                <a href="html/tasks.html">✔️ Tasks</a>
+                <a href="html/assets.html">📂 Assets</a>
+                <a href="html/collaboration.html">💬 Collaboration</a>
+                <a href="html/tools.html">🛠️ Tools</a>
+            </nav>
+            <button id="dockToggle" onclick="toggleTaskbar()">Undock Taskbar</button>
+        </aside>
+
+        <!-- Main Content -->
+        <main id="workspaceContent">
+            <header class="sticky-header">
+                <h1>Welcome, John Doe!</h1>
+                <p>Your design and development workspace is ready.</p>
+            </header>
+            <section id="welcomeSection">
+                <h2>Getting Started</h2>
+                <p>Select a feature from the sidebar to begin.</p>
+            </section>
+        </main>
     </div>
 </body>
 </html>
