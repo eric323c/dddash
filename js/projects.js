@@ -4,9 +4,10 @@ let projects = [];
 function addProject() {
     const title = document.getElementById("projectTitle").value;
     const description = document.getElementById("projectDesc").value;
+    const dueDate = document.getElementById("projectDueDate").value;
 
-    if (title && description) {
-        projects.push({ title, description, status: "to-do" });
+    if (title && description && dueDate) {
+        projects.push({ title, description, dueDate, status: "to-do", tasks: [] });
         renderKanban();
         closeModal("addProjectModal");
     }
@@ -16,47 +17,52 @@ function addProject() {
 function renderKanban() {
     const kanban = document.getElementById("projectKanban");
     kanban.innerHTML = `
-        <div class="kanban-column"><h3>To Do</h3></div>
-        <div class="kanban-column"><h3>In Progress</h3></div>
-        <div class="kanban-column"><h3>Completed</h3></div>
+        <div class="kanban-column" data-status="to-do"><h3>To Do</h3></div>
+        <div class="kanban-column" data-status="in-progress"><h3>In Progress</h3></div>
+        <div class="kanban-column" data-status="completed"><h3>Completed</h3></div>
     `;
 
     projects.forEach((project) => {
-        const columnIndex =
-            project.status === "to-do"
-                ? 0
-                : project.status === "in-progress"
-                ? 1
-                : 2;
-
-        const column = kanban.children[columnIndex];
+        const column = kanban.querySelector(`.kanban-column[data-status="${project.status}"]`);
         const item = document.createElement("div");
         item.className = "kanban-item";
-        item.innerHTML = `<strong>${project.title}</strong><br>${project.description}`;
-        item.onclick = () => changeProjectStatus(project);
+        item.draggable = true;
+        item.innerHTML = `
+            <strong>${project.title}</strong>
+            <p>${project.description}</p>
+            <small>Due: ${project.dueDate}</small>
+            <div class="progress-bar">
+                <div style="width: ${calculateProgress(project)}%;"></div>
+            </div>
+        `;
+        item.addEventListener("dragstart", () => handleDragStart(project));
         column.appendChild(item);
     });
 }
 
-// Change project status (cycle between To Do, In Progress, Completed)
-function changeProjectStatus(project) {
-    if (project.status === "to-do") {
-        project.status = "in-progress";
-    } else if (project.status === "in-progress") {
-        project.status = "completed";
-    } else {
-        project.status = "to-do";
-    }
-    renderKanban();
+// Drag-and-drop functionality
+let draggedProject = null;
+
+function handleDragStart(project) {
+    draggedProject = project;
 }
 
-// Sort projects by deadline (placeholder functionality)
-function sortProjects() {
-    alert("Sorting by deadline is not implemented yet.");
+function handleDrop(status) {
+    if (draggedProject) {
+        draggedProject.status = status;
+        renderKanban();
+        draggedProject = null;
+    }
+}
+
+// Calculate project progress
+function calculateProgress(project) {
+    const totalTasks = project.tasks.length || 1;
+    const completedTasks = project.tasks.filter((task) => task.completed).length;
+    return Math.round((completedTasks / totalTasks) * 100);
 }
 
 // Initialize Kanban board
 window.onload = function () {
     renderKanban();
 };
-
