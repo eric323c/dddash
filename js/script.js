@@ -4,40 +4,43 @@ function toggleSidebar() {
     taskbar.classList.toggle("collapsed");
 }
 
-// Undock and dock the taskbar
-let taskbarWindow = null;
-
-function toggleTaskbar() {
-    const taskbar = document.getElementById("taskbarDocked");
-    const dockToggle = document.getElementById("dockToggle");
-
-    if (taskbar.classList.contains("hidden")) {
-        // Dock the taskbar
-        taskbar.classList.remove("hidden");
-        dockToggle.innerText = "Undock Taskbar";
-        if (taskbarWindow) taskbarWindow.close();
-    } else {
-        // Undock the taskbar
-        taskbar.classList.add("hidden");
-        dockToggle.innerText = "Dock Taskbar";
-        taskbarWindow = window.open(
-            "taskbar.html",
-            "Taskbar",
-            "width=250,height=600,left=100,top=100,resizable=no"
-        );
-        taskbarWindow.onbeforeunload = () => {
-            // Automatically dock the taskbar when the window closes
-            taskbar.classList.remove("hidden");
-            dockToggle.innerText = "Undock Taskbar";
-        };
+// Highlight active tab
+function highlightActiveTab(tabName) {
+    const links = document.querySelectorAll(".taskbar nav a");
+    links.forEach((link) => link.classList.remove("active"));
+    const activeLink = document.querySelector(`.taskbar nav a[href="${tabName}.html"]`);
+    if (activeLink) {
+        activeLink.classList.add("active");
     }
 }
 
-/** Tabs Functionality */
-function switchTab(tabId) {
-    const tabs = document.querySelectorAll(".tabContent");
-    tabs.forEach((tab) => tab.classList.add("hidden"));
-    document.getElementById(`${tabId}Tab`).classList.remove("hidden");
+// Notification badges
+function updateNotificationBadge(tabName, count) {
+    const badge = document.querySelector(`.taskbar nav a[href="${tabName}.html"] .notification-badge`);
+    if (badge) badge.innerText = count > 0 ? count : "";
+}
+
+// Favorites section
+function renderFavorites() {
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    const favoritesContainer = document.getElementById("favoritesContainer");
+    favoritesContainer.innerHTML = favorites
+        .map((tab) => `<a href="${tab}.html" class="nav-item">${tab}</a>`)
+        .join("");
+}
+
+function toggleFavorite(tabName) {
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    if (favorites.includes(tabName)) {
+        localStorage.setItem(
+            "favorites",
+            JSON.stringify(favorites.filter((tab) => tab !== tabName))
+        );
+    } else {
+        favorites.push(tabName);
+        localStorage.setItem("favorites", JSON.stringify(favorites));
+    }
+    renderFavorites();
 }
 
 /** Modals Functionality */
@@ -49,18 +52,8 @@ function closeModal(modalId) {
     document.getElementById(modalId).classList.add("hidden");
 }
 
-/** Collaboration Notes */
-function saveCollabNotes() {
-    const notes = document.getElementById("collabNotes").value;
-    localStorage.setItem("collabNotes", notes);
-}
-
-function loadCollabNotes() {
-    const notes = localStorage.getItem("collabNotes") || "";
-    document.getElementById("collabNotes").value = notes;
-}
-
 /** Page Initialization */
 window.onload = function () {
-    loadCollabNotes();
+    renderFavorites();
+    highlightActiveTab(location.pathname.split("/").pop().split(".")[0]);
 };
