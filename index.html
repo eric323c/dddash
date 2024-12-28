@@ -4,14 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Workspace</title>
-    <!-- Link to the global CSS -->
     <link rel="stylesheet" href="css/styles.css">
-    <!-- Link to the global JS -->
     <script src="js/script.js" defer></script>
 </head>
 <body>
     <div id="workspace">
-        <!-- Sidebar -->
+        <!-- Sidebar (Taskbar) -->
         <aside id="taskbarDocked" class="taskbar">
             <button id="collapseToggle" onclick="toggleSidebar()">☰</button>
             <div class="profile">
@@ -22,12 +20,12 @@
                 </div>
             </div>
             <nav>
-                <!-- Links updated for root directory structure -->
-                <a href="html/projects.html">📁 Projects</a>
-                <a href="html/tasks.html">✔️ Tasks</a>
-                <a href="html/assets.html">📂 Assets</a>
-                <a href="html/collaboration.html">💬 Collaboration</a>
-                <a href="html/tools.html">🛠️ Tools</a>
+                <a href="index.html" class="nav-item">🏠 Dashboard</a>
+                <a href="projects.html" class="nav-item">📁 Projects</a>
+                <a href="tasks.html" class="nav-item">✔️ Tasks</a>
+                <a href="assets.html" class="nav-item">📂 Assets</a>
+                <a href="collaboration.html" class="nav-item">💬 Collaboration</a>
+                <a href="tools.html" class="nav-item">🛠️ Tools</a>
             </nav>
             <button id="dockToggle" onclick="toggleTaskbar()">Undock Taskbar</button>
         </aside>
